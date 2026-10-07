@@ -99,7 +99,6 @@
       if err != nil {
           return nil, err
       }
-
       req.Header.Set("Authorization", d.Token)
       req.Header.Set("User-Agent", d.UserAgent)
       req.Header.Set("Content-Type", "application/json")
@@ -121,18 +120,15 @@
           "content": content,
           "tts":     false,
       }
-
       jsonData, err := json.Marshal(payload)
       if err != nil {
           return err
       }
-
       resp, err := d.makeRequest("POST", fmt.Sprintf("/channels/%s/messages", channelID), bytes.NewBuffer(jsonData))
       if err != nil {
           return err
       }
       resp.Body.Close()
-
       return nil
   }
 
@@ -140,19 +136,16 @@
       payload := map[string]interface{}{
           "content": content,
       }
-
       jsonData, err := json.Marshal(payload)
       if err != nil {
           return err
       }
-
       resp, err := d.makeRequest("PATCH", fmt.Sprintf("/channels/%s/messages/%s", channelID, messageID),
   bytes.NewBuffer(jsonData))
       if err != nil {
           return err
       }
       resp.Body.Close()
-
       return nil
   }
 
@@ -162,7 +155,6 @@
           return err
       }
       resp.Body.Close()
-
       return nil
   }
 
@@ -172,10 +164,8 @@
           return nil, err
       }
       defer resp.Body.Close()
-
       body, _ := io.ReadAll(resp.Body)
       var messages []MessageEvent
-
       messagesArray := gjson.ParseBytes(body).Array()
       for _, msg := range messagesArray {
           event := MessageEvent{
@@ -186,7 +176,6 @@
           }
           messages = append(messages, event)
       }
-
       return messages, nil
   }
 
@@ -196,7 +185,6 @@
           return err
       }
       resp.Body.Close()
-
       return nil
   }
 
@@ -207,7 +195,6 @@
           return err
       }
       resp.Body.Close()
-
       return nil
   }
 
@@ -218,7 +205,6 @@
           return err
       }
       resp.Body.Close()
-
       return nil
   }
 
@@ -228,10 +214,8 @@
           return nil, err
       }
       defer resp.Body.Close()
-
       body, _ := io.ReadAll(resp.Body)
       var guilds []Guild
-
       guildsArray := gjson.ParseBytes(body).Array()
       for _, guild := range guildsArray {
           g := Guild{
@@ -240,7 +224,6 @@
           }
           guilds = append(guilds, g)
       }
-
       return guilds, nil
   }
 
@@ -250,10 +233,8 @@
           return nil, err
       }
       defer resp.Body.Close()
-
       body, _ := io.ReadAll(resp.Body)
       var channels []Channel
-
       channelsArray := gjson.ParseBytes(body).Array()
       for _, channel := range channelsArray {
           c := Channel{
@@ -265,7 +246,6 @@
           }
           channels = append(channels, c)
       }
-
       return channels, nil
   }
 

@@ -16,7 +16,6 @@ It's a discord selfbot written in Go that does everything except make you coffee
    • HypeSquad - change your HypeSquad house
    • And 30+ more commands - too lazy to list them all
 ```
-
 # WARNING
 Selfbotting violates Discord’s Terms of Service.
 You can be disabled, limited, or terminated if you used this.
