@@ -1,5 +1,3 @@
-# Discord Selfbot
-
 # What this?
 It's a discord selfbot written in Go that does everything except make you coffee. It runs on your user account (not a bot account) so you can bypass Discord's restrictions and do whatever you want.
 
@@ -23,32 +21,3 @@ It's a discord selfbot written in Go that does everything except make you coffee
 Selfbotting violates Discord’s Terms of Service.
 You can be disabled, limited, or terminated if you used this.
 I AM not responsible for what you do with this client.
-
-# INSTRUCTION
-## Install Go (if you haven't already)
-```
-> Windows: Download from golang.org
-> Linux: sudo apt install golang-go
-> macOS: brew install go
-```
-### 1. Clone & Install
-```
-Clone this repository (or just copy the file).
-git clone [https://github.com/eiey/sb-go]
-cd sb-go
-```
-### 3. Install dependencies
-```
-go get github.com/gorilla/websocket
-go get github.com/tidwall/gjson
-```
-### 4. Get your Discord token
-```
-Open Discord in browser
-Press F12 → Application → Local Storage
-Copy the token value (remove quotes)
-```
-### 5. Run it
-```
-go run main.go "YOUR_TOKEN_HERE"
-```

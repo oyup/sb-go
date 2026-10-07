@@ -85,14 +85,11 @@
           return err
       }
       defer resp.Body.Close()
-
       body, _ := io.ReadAll(resp.Body)
       userData := gjson.ParseBytes(body)
-
       d.UserID = userData.Get("id").String()
       d.Username = userData.Get("username").String()
       d.Discriminator = userData.Get("discriminator").String()
-
       fmt.Printf("[+] Logged in as %s#%s (%s)\n", d.Username, d.Discriminator, d.UserID)
       return nil
   }
@@ -116,7 +113,6 @@
       req.Header.Set("Sec-Fetch-Mode", "cors")
       req.Header.Set("Sec-Fetch-Site", "same-origin")
       req.Header.Set("TE", "trailers")
-
       return d.Client.Do(req)
   }
 
@@ -287,13 +283,10 @@
           return err
       }
       defer file.Close()
-
       fileInfo, _ := file.Stat()
       fileSize := fileInfo.Size()
-
       body := &bytes.Buffer{}
       writer := multipart.NewWriter(body)
-
       part, err := writer.CreateFormFile("file", filepath.Base(filePath))
       if err != nil {
           return err
@@ -305,7 +298,6 @@
       }
 
       writer.Close()
-
       req, err := http.NewRequest("POST", fmt.Sprintf("https://discord.com/api/v9/channels/%s/messages", channelID), body)
       if err != nil {
           return err
@@ -313,17 +305,14 @@
 
       req.Header.Set("Authorization", d.Token)
       req.Header.Set("Content-Type", writer.FormDataContentType())
-
       resp, err := d.Client.Do(req)
       if err != nil {
           return err
       }
       resp.Body.Close()
-
       return nil
   }
 
-  // Commands
   func (d *DiscordSelfbot) initializeCommands() {
       d.Commands["ping"] = Command{
           Name:        "ping",
@@ -656,7 +645,6 @@
       var stdout, stderr bytes.Buffer
       cmd.Stdout = &stdout
       cmd.Stderr = &stderr
-
       err := cmd.Run()
       if err != nil {
           bot.SendMessage(channelID, fmt.Sprintf("Error: %v", err))
@@ -683,7 +671,6 @@
 
       url := args[0]
       path := args[1]
-
       resp, err := http.Get(url)
       if err != nil {
           bot.SendMessage(channelID, fmt.Sprintf("Download failed: %v", err))
